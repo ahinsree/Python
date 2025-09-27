@@ -1,0 +1,8 @@
+username = input("Enter username:")
+password = input("Enter password:")
+email = input("Enter email:")
+age = input("Enter age:")
+print(f"\nRegistration successful!")
+print(f"Username: {username}")
+print(f"email: {email}")
+print(f"Age: {age}")
