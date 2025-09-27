@@ -51,3 +51,25 @@ print(f"{a} >= {b} : {a>=b}")
 print(f"{a} <= {b} : {a<=b}")
 print(f"{a} == {b} : {a==b}")
 print(f"{a} != {b}: {a!=b}")
+print("\n"+"="*40)
+print("7. TYPE CONVERSION")
+# String to number conversion
+number_str = "100"
+converted_number = int(number_str)
+print(f"number_string:{number_str}->converted_number:{converted_number}")
+#Number to string conversion
+number = 250
+converted_str = str(number)
+print(f"number:{number}-> converted_str:{converted_str}")
+#input conversion practice
+print("\n 8. INPUT CONVERSION PRACTICE")
+# Get input from useer alway as string
+birth_year_input = input("Enter what year you were born:")
+birth_year = int(birth_year_input)
+age = 2025 - birth_year
+print(f"you are approximately {age} year old!")
+# Temperature conversion example
+celsius_input = input("Enter temperature in celsius:")
+celsius = float(celsius_input)
+fahrenheit = (celsius * 9/5) + 32
+print(f"{celsius}°C is equal to {fahrenheit}°F")
