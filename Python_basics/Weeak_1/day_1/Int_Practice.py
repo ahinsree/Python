@@ -1,19 +1,13 @@
-while True:
-    try:
-        number = int(input("Enter a number: "))
-        if number < 0:
-            print("Factorial undefined for negatives!")
-            again = input("Do you want to calculate again? (yes/no): ")
-            if again.lower() != "yes":
-                break
-            continue
-        # Calculate factorial using loop
-        fact = 1
-        for i in range(1, number + 1):
-            fact *= i
-        print(f"The factorial of {number} is {fact}")
-        again = input("Do you want to calculate again? (yes/no): ")
-        if again.lower() != "yes":
-            break
-    except ValueError:
-        print("Invalid input! Please enter whole numbers only.")
+def factorial(n):
+    if not isinstance(n, int) or n < 0:
+        raise ValueError("Input must be a non-negative integer!")
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+# Test
+try:
+    print(factorial(-1))  # Raises ValueError
+except ValueError as e:
+    print(e)  # Output: Input must be a non-negative integer!
