@@ -1,14 +1,38 @@
 import pandas as pd
 from datetime import datetime, timedelta
 
+def get_start_date_from_user():
+    """Interactively gets the desired start date from the user."""
+    today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    
+    while True:
+        print("\nSelect a start date option:")
+        print("  1. Start Today")
+        print("  2. Start Next Monday")
+        print("  3. Enter a custom date (YYYY-MM-DD)")
+        choice = input("Enter your choice (1, 2, or 3): ")
+
+        if choice == '1':
+            return today
+        elif choice == '2':
+            days_until_monday = (7 - today.weekday()) % 7
+            if days_until_monday == 0:  # If today is Monday, start next Monday
+                days_until_monday = 7
+            return today + timedelta(days=days_until_monday)
+        elif choice == '3':
+            while True:
+                date_str = input("Enter the start date (YYYY-MM-DD): ")
+                try:
+                    return datetime.strptime(date_str, "%Y-%m-%d")
+                except ValueError:
+                    print("❌ Invalid format. Please use YYYY-MM-DD.")
+        else:
+            print("❌ Invalid choice. Please enter 1, 2, or 3.")
+
 def create_dsa_learning_syllabus():
-    # Calculate start date (next Monday)
-    today = datetime.now()
-    days_until_monday = (7 - today.weekday()) % 7
-    if days_until_monday == 0:  # If today is Monday, start next Monday
-        days_until_monday = 7
-    start_date = today + timedelta(days=days_until_monday)
-    start_date = start_date.replace(hour=0, minute=0, second=0, microsecond=0)
+    """Generates the main DSA learning syllabus Excel file."""
+    # Get start date from user for better convenience
+    start_date = get_start_date_from_user()
     
     print(f"📅 DSA Syllabus starts on: {start_date.strftime('%A, %B %d, %Y')}")
     
