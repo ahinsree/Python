@@ -1,5 +1,10 @@
 import timeit
-import matplotlib.pyplot as plt
+try:
+    import matplotlib.pyplot as plt
+    MATPLOTLIB_AVAILABLE = True
+except ImportError:
+    MATPLOTLIB_AVAILABLE = False
+
 
 def linear_search(arr, target):
     """Simple linear search for timing."""
@@ -15,12 +20,17 @@ def time_linear_search(n, num_runs=1000):
     
     # Pass variables to timeit using 'globals' to avoid large string formatting.
     # This is much more efficient than embedding the list into the setup string.
-    setup = "from __main__ import linear_search"
+    setup = ""  # Setup is not needed as all variables are passed via 'globals'.
     stmt = "linear_search(arr, target)"
     return timeit.timeit(stmt, setup=setup, number=num_runs, globals={'linear_search': linear_search, 'arr': arr, 'target': target})
 
 def plot_times(sizes, times, title="Linear Search Time Growth", xlabel="Array Size (n)", ylabel="Total Time for 1,000 Runs (s)"):
     """Plot timing data using matplotlib."""
+    if not MATPLOTLIB_AVAILABLE:
+        print("\nMatplotlib not found. Skipping plot generation.")
+        print("To see the plot, please install the library: pip install matplotlib")
+        return
+
     plt.figure(figsize=(8, 6))
     plt.plot(sizes, times, marker='o', linestyle='-', color='b')
     plt.xlabel(xlabel)
